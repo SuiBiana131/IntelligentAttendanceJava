@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.JurUserMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.JurUser">
+    select * from jurUser where userid = #{userid}
+  </select>
+   <select id="selectByJur" parameterType="int" resultType="java.util.Map">
+    select jurUser.userid,jurUser.jurid,information.nickname from jurUser,information where jurid > #{jurid} and jurUser.userid=information.userid
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from jurUser
+    where userid = #{userid}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.JurUser">
+    insert into jurUser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jurid != null">
+        jurid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jurid != null">
+        #{jurid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.JurUser">
+    update jurUser
+    <set>
+      <if test="jurid != null">
+        jurid=#{jurid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid=#{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

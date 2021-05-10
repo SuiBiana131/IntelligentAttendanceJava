@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.FormapplyMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Formapply">
+    select * from Formapply where id = #{id}
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Formapply">
+    select * from Formapply 
+  </select>
+  <select id="selectAllOk"  resultType="com.example.demo.entity.Formapply">
+    select * from Formapply where status = '未审批'
+  </select>
+  <select id="selectAllNo"  resultType="com.example.demo.entity.Formapply">
+    select * from Formapply where status != '未审批' and status != '未完善'
+  </select>
+  <select id="selectAlldelete"  resultType="com.example.demo.entity.Formapply">
+    select * from Formapply where username = #{username} and isDelete=0
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Formapply
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Formapply">
+    insert into Formapply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="applytime != null">
+        applytime,
+      </if>
+      <if test="examinetime != null">
+        examinetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isDelete != null">
+        isDelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+       <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null">
+        #{applytime,jdbcType=VARCHAR},
+      </if>
+       <if test="examinetime != null">
+        #{examinetime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Formapply">
+    update Formapply
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+       <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null">
+        applytime = #{applytime,jdbcType=VARCHAR},
+      </if>
+       <if test="examinetime != null">
+        examinetime = #{examinetime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        isDelete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

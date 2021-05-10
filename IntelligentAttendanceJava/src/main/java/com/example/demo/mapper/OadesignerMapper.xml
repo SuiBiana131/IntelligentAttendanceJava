@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.OadesignerMapper">
+  <select id="selectById" parameterType="int" resultMap="resultCustomerMap">
+    select oadesigner.id as oid,oadesigner.name,oadesigner.image,oadesigner.text,oadesigner.range,
+    design.id as did,design.oaId,design.title,design.type from oadesigner,design where oadesigner.id = #{id} and oadesigner.id = design.oaId
+  </select>
+  <resultMap type="com.example.demo.entity.Oadesigner" id="resultCustomerMap"> 
+    <id column="oid"  property="id" />
+    <result property="name" column="name"/> 
+    <result property="image" column="image"/> 
+    <result property="text" column="text"/> 
+    <result property="range" column="range"/> 
+    <collection property="lists" ofType="com.example.demo.entity.Design">
+          <id property="id" column="did"/>
+          <result property="oaId" column="oaId"/>
+          <result property="title" column="title"/>
+          <result property="type" column="type"/>
+    </collection>
+  </resultMap> 
+  <delete id="deleteById" parameterType="int">
+    delete from Oadesigner
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Oadesigner">
+    insert into Oadesigner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="text != null">
+        text,
+      </if>
+      <if test="image != null">
+        range,
+      </if>
+      <if test="text != null">
+        changeTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+       <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null">
+        #{range,jdbcType=VARCHAR},
+      </if>
+       <if test="changeTime != null">
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Oadesigner">
+    update Oadesigner
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+       <if test="text != null">
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null">
+        range = #{range,jdbcType=VARCHAR},
+      </if>
+       <if test="changeTime != null">
+        changeTime = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

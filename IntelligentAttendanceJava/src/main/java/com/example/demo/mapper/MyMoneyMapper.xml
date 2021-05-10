@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.MyMoneyMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.MyMoney">
+    select * from myMoney where userid = #{userid}
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.MyMoney">
+    select * from myMoney 
+  </select>
+  <select id="selectCondition"  resultType="com.example.demo.entity.MyMoney">
+    select * from myMoney <where>
+    <if test="userid != null and userid != ''">
+       userid=#{userid,jdbcType=INTEGER}
+    </if>
+    <if test="state != null and state != ''">
+       AND state=#{state,jdbcType=INTEGER}
+    </if>
+     <if test="date != null and date != ''">
+       AND date=#{date,jdbcType=DATE}
+    </if>
+    </where> 
+  </select>
+  <select id="selectCount" parameterType="int" resultType="java.util.Map">
+    select count(state = 0 or NULL) AS 'state0', 
+    count(state = 1 or NULL) AS 'state1', 
+    count(state = 2 or NULL) AS 'state2'
+    from myMoney where userid = #{userid}
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from myMoney
+    where userid = #{userid}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.MyMoney">
+    insert into myMoney
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="commendation != null">
+        commendation,
+      </if>
+      <if test="attendancebonus != null">
+        attendancebonus,
+      </if>
+      <if test="basic != null">
+        basic,
+      </if>
+      <if test="accommodation != null">
+        accommodation,
+      </if>
+      <if test="commission != null">
+        commission,
+      </if>
+      <if test="tax != null">
+        tax,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="commendation != null">
+        #{commendation,jdbcType=INTEGER},
+      </if>
+      <if test="attendancebonus != null">
+        #{attendancebonus,jdbcType=INTEGER},
+      </if>
+      <if test="basic != null">
+        #{basic,jdbcType=INTEGER},
+      </if>
+      <if test="accommodation != null">
+        #{accommodation,jdbcType=INTEGER},
+      </if>
+      <if test="commission != null">
+        #{commission,jdbcType=INTEGER},
+      </if>
+      <if test="tax != null">
+        #{tax,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.MyMoney">
+    update myMoney
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid=#{userid,jdbcType=INTEGER},
+      </if>
+      <if test="commendation != null">
+        commendation=#{commendation,jdbcType=INTEGER},
+      </if>
+      <if test="attendancebonus != null">
+        attendancebonus = #{attendancebonus,jdbcType=INTEGER},
+      </if>
+      <if test="basic != null">
+        basic=#{basic,jdbcType=INTEGER},
+      </if>
+      <if test="accommodation != null">
+        accommodation=#{accommodation,jdbcType=INTEGER},
+      </if>
+      <if test="commission != null">
+        commission = #{commission,jdbcType=INTEGER},
+      </if>
+      <if test="tax != null">
+        tax=#{tax,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date=#{date,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

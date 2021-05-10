@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.StaffAttendMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.StaffAttend">
+    select * from StaffAttend where id = #{id}
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.StaffAttend">
+    select * from StaffAttend 
+  </select>
+  <select id="selectBydate"  resultType="Map">
+    select id,userid,start,end,state,date from StaffAttend where `date`=#{str}
+  </select>
+  <select id="selectByEveryday"  resultType="Map">
+    select date,start,end from StaffAttend where userid=#{uid} 
+    <if test="start != null">AND `date` <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if>
+  </select>
+  <select id="selectNum"  resultType="int">
+    select COALESCE(count(*),0) from  StaffAttend  where state=#{str} AND userid=#{uid} 
+    <if test="start != null">AND `date` <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if>
+  </select>
+  <select id="selectAttnum"  resultType="int">
+  	select COALESCE(count(*),0) from  StaffAttend  where state!=#{str} AND userid=#{uid}  
+    <if test="start != null">AND `date` <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if> 
+  </select>
+  <select id="selectWorkTime"  resultType="int">
+  	select COALESCE(sum(a.time),0) from (select TIMESTAMPDIFF(SECOND,start,end)  as time from  StaffAttend  where userid=#{uid}  
+    <if test="start != null">AND `date` <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if>) as a 
+  </select>
+  <select id="selectLateTime"  resultType="int">
+  	select COALESCE(sum(a.time),0) from(select TIMESTAMPDIFF(SECOND,start,#{latetime})  as time from  StaffAttend  where state=#{str} AND userid=#{uid}  
+    <if test="start != null">AND `date` <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if>) as a 
+  </select>
+  <select id="selectLeaveTime"  resultType="int">
+  	select COALESCE(sum(a.time),0) from(select TIMESTAMPDIFF(SECOND,#{latetime},end)  as time from  StaffAttend  where state=#{str} AND userid=#{uid} 
+    <if test="start != null">AND date <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if>) as a 
+  </select>
+  <select id="selectAttend"  resultType="com.example.demo.entity.StaffAttend">
+    select * from StaffAttend where userid = #{userid} and `date` = #{date}
+  </select>
+  <select id="selectCondition"  resultType="com.example.demo.entity.StaffAttend">
+    select * from StaffAttend <where>
+    <if test="userid != null and userid != ''">
+       userid=#{userid,jdbcType=INTEGER}
+    </if>
+    <if test="state != null and state != ''">
+       AND state=#{state,jdbcType=VARCHAR}
+    </if>
+     <if test="date != null and date != ''">
+       AND date=#{date,jdbcType=DATE}
+    </if>
+    </where> 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from StaffAttend
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.StaffAttend">
+    insert into StaffAttend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="end != null">
+        end,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=TIME},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=TIME},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.StaffAttend">
+    update StaffAttend
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        start=#{start,jdbcType=TIME},
+      </if>
+      <if test="end != null">
+        end=#{end,jdbcType=TIME},
+      </if>
+      <if test="state != null">
+        state=#{state,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date=#{date,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

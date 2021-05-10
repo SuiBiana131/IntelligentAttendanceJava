@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.MoneyMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Money">
+    select * from money where id = #{id}
+  </select>
+  <select id="selectMoney" parameterType="int" resultType="java.util.Map">
+    select accommodation.cost,information.money from information,accommodation,UserAccommodation 
+    where information.userid = #{userid} and information.userid = UserAccommodation.userid and UserAccommodation.accommodationid = accommodation.id
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from money
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Money">
+    insert into money
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="attendancebonus != null">
+        attendancebonus,
+      </if>
+      <if test="Commendation != null">
+        Commendation,
+      </if>
+      <if test="tax != null">
+        tax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="attendancebonus != null">
+        #{attendancebonus,jdbcType=INTEGER},
+      </if>
+      <if test="Commendation != null">
+        #{Commendation,jdbcType=INTEGER},
+      </if>
+      <if test="tax != null">
+        #{tax,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Money">
+    update money
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="attendancebonus != null">
+        attendancebonus=#{attendancebonus,jdbcType=INTEGER},
+      </if>
+      <if test="Commendation != null">
+        Commendation=#{Commendation,jdbcType=INTEGER},
+      </if>
+      <if test="tax != null">
+        tax=#{tax,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

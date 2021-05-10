@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.DepartmentMapper">
+
+	<select id="selectOneById" resultType="com.example.demo.entity.Department" parameterType="int">
+		select id,departmentName,departmentDescribe from department where id=#{id}
+	</select>
+	
+	<update id="updateDepartment" parameterType="com.example.demo.entity.Department">
+		update department set departmentName=#{departmentName},departmentDescribe=#{departmentDescribe} where id=#{id};
+	</update>
+
+	<delete id="deleteDepartment" parameterType="int">
+		delete from user where id=#{id};
+	</delete>
+	
+	<select id="selectDepartmentAll" resultType="com.example.demo.entity.Department">
+		select id,departmentName,departmentDescribe from department
+	</select>
+	
+	<select id="selectDepartmentPage" resultType="com.example.demo.entity.Department">
+		select id,departmentName,departmentDescribe from department limit #{start},#{pageNum}
+	</select>
+</mapper>

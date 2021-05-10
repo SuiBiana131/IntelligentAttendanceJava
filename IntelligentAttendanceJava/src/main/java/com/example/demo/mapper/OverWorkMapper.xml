@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.OverWorkMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Overwork">
+    select * from overwork where id = #{id}
+  </select>
+  <select id="selectOverworkType"  resultType="int">
+    select COALESCE(sum(a.time),0) from(select TIMESTAMPDIFF(SECOND,start,end) as time from  overwork  where isapply=1 AND type=#{str} AND userid=#{userid}  
+    <if test="start != null">AND `date` <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if>) as a
+  </select>
+  <select id="selectOverworkResType"  resultType="int">
+    select COALESCE(sum(a.time),0) from(select TIMESTAMPDIFF(SECOND,start,end) as time from  overwork  where isapply=1 AND changetype=#{str} AND userid=#{userid}  
+    <if test="start != null">AND `date` <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if>) as a
+  </select>
+  <select id="selectOverworkAll"  resultType="int">
+    select COALESCE(sum(a.time),0) from(select TIMESTAMPDIFF(SECOND,start,end) as time from  overwork  where isapply=1 AND userid=#{userid}  
+    <if test="start != null">AND `date` <![CDATA[>=]]> #{start}</if>
+    <if test="end != null">AND `date` <![CDATA[<=]]> #{end}</if>) as a
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Overwork">
+    select * from overwork 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from overwork
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Overwork">
+    insert into overwork
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="end != null">
+        end,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="isoverwork != null">
+        isoverwork,
+      </if>
+      <if test="isapply != null">
+        isapply,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="changetype != null">
+        changetype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=TIME},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=TIME},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="isoverwork != null">
+        #{isoverwork,jdbcType=INTEGER},
+      </if>
+      <if test="isapply != null">
+        #{isapply,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="changetype != null">
+        #{changetype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Overwork">
+    update overwork
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        start=#{start,jdbcType=TIME},
+      </if>
+      <if test="end != null">
+        end=#{end,jdbcType=TIME},
+      </if>
+      <if test="times != null">
+        times=#{times,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        `date`=#{date,jdbcType=DATE},
+      </if>
+      <if test="isoverwork != null">
+        isoverwork=#{isoverwork,jdbcType=INTEGER},
+      </if>
+      <if test="isapply != null">
+        isapply=#{isapply,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type=#{type,jdbcType=VARCHAR},
+      </if>
+      <if test="changetype != null">
+        changetype=#{changetype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

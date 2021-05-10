@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.UsergroupMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Usergroup">
+    select * from Usergroup where id = #{id}
+  </select>
+  <select id="selectNum" parameterType="int" resultType="String">
+    select groupname from Usergroup where id in (select Max(id) from Usergroup group by groupname)
+  </select>
+  <select id="selectByGroupname" parameterType="String" resultType="com.example.demo.entity.Usergroup">
+    select * from Usergroup where groupname = #{groupname}
+  </select>
+  <select id="selectByusername" parameterType="String" resultType="com.example.demo.entity.Usergroup">
+    select * from Usergroup where username = #{username}
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Usergroup
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Usergroup">
+    insert into Usergroup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="groupname != null">
+        groupname,
+      </if>
+      <if test="text != null">
+        text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null">
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Usergroup">
+    update Usergroup
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid=#{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username=#{username,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null">
+        groupname=#{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        text=#{text,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

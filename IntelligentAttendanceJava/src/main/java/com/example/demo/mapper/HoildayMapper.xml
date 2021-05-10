@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.HoildayMapper">
+<select id="selectById" parameterType="int" resultType="com.example.demo.entity.Hoilday">
+    select * from Hoilday where id = #{id}
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Hoilday">
+    select * from Hoilday 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Hoilday
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Hoilday">
+    insert into Hoilday
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="range != null">
+        `range`,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="compute != null">
+        compute,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null">
+        #{range,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="compute != null">
+        #{compute,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Hoilday">
+    update Hoilday
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null">
+        `range` = #{range,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="compute != null">
+        compute = #{compute,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

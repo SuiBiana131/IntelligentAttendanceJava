@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MappointMapper">
+<select id="selectById" parameterType="int" resultType="com.example.demo.entity.Mappoint">
+    select * from Mappoint where id = #{id}
+  </select>
+  <select id="selectBygid"  resultType="com.example.demo.entity.Mappoint">
+    select * from Mappoint where groupId = #{id} 
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Mappoint">
+    select * from Mappoint 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Mappoint
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Mappoint">
+    insert into Mappoint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+      <if test="groupId != null">
+        groupId,
+      </if>
+      <if test="radius != null">
+        radius,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+       <if test="radius != null">
+        #{radius,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Mappoint">
+    update mappoint
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        lng = #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        groupId = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="radius != null">
+        radius = #{radius,jdbcType=VARCHAR}, 
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

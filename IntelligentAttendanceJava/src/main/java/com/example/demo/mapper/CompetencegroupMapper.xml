@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CompetencegroupMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Competencegroup">
+    select * from Competencegroup where id = #{id}
+  </select>
+  <select id="selectByname" parameterType="String" resultType="com.example.demo.entity.Competencegroup">
+    select * from Competencegroup where name = #{name}
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Competencegroup">
+    select * from Competencegroup 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Competencegroup
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Competencegroup">
+    insert into Competencegroup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="freeWorkday != null">
+        freeWorkday,
+      </if>
+      <if test="isHoilday != null">
+        isHoilday,
+      </if>
+      <if test="stytle != null">
+        stytle,
+      </if>
+      <if test="overWorkRule != null">
+        overWorkRule,
+      </if>
+      <if test="isDelivery != null">
+        isDelivery,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+       <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="freeWorkday != null">
+        #{freeWorkday,jdbcType=VARCHAR},
+      </if>
+       <if test="isHoilday != null">
+        #{isHoilday,jdbcType=VARCHAR},
+      </if>
+      <if test="stytle != null">
+        #{stytle,jdbcType=VARCHAR},
+      </if>
+      <if test="overWorkRule != null">
+        #{overWorkRule,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelivery != null">
+        #{isDelivery,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Competencegroup">
+    update Competencegroup
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+       <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="freeWorkday != null">
+        freeWorkday = #{freeWorkday,jdbcType=VARCHAR},
+      </if>
+       <if test="isHoilday != null">
+        isHoilday = #{isHoilday,jdbcType=VARCHAR},
+      </if>
+      <if test="stytle != null">
+        stytle = #{stytle,jdbcType=VARCHAR},
+      </if>
+      <if test="overWorkRule != null">
+        overWorkRule = #{overWorkRule,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelivery != null">
+        isDelivery = #{isDelivery,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

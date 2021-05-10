@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OvretimeMapper">
+<select id="selectById" parameterType="int" resultType="com.example.demo.entity.Ovretime">
+    select * from Ovretime where id = #{id}
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Ovretime">
+    select * from Ovretime 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Ovretime
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Ovretime">
+    insert into Ovretime
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="range != null">
+        `range`,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="howLong != null">
+        howLong,
+      </if>
+      <if test="isWorkDay != null">
+        isWorkDay,
+      </if>
+      <if test="workDayCompute != null">
+        workDayCompute,
+      </if>
+      <if test="isMoneyWorkDay != null">
+        isMoneyWorkDay,
+      </if>
+      <if test="moneyWorkDay != null">
+        moneyWorkDay,
+      </if>
+      <if test="ratioWorkDay != null">
+        ratioWorkDay,
+      </if>
+      <if test="ratiotimeWorkDay != null">
+        ratiotimeWorkDay,
+      </if>
+      <if test="isRestDay != null">
+        isRestDay,
+      </if>
+      <if test="isHoilday != null">
+        isHoilday,
+      </if>
+      <if test="restDayCompute != null">
+        restDayCompute,
+      </if>
+      <if test="hoildayCompute != null">
+        hoildayCompute,
+      </if>
+      <if test="isMoneyRestDay != null">
+        isMoneyRestDay,
+      </if>
+      <if test="isMoneyHoilday != null">
+        isMoneyHoilday,
+      </if>
+      <if test="moneyRestDay != null">
+        moneyRestDay,
+      </if>
+      <if test="moneyHoilday != null">
+        moneyHoilday,
+      </if>
+      <if test="ratioRestDay != null">
+        ratioRestDay,
+      </if>
+      <if test="ratioHoilday != null">
+        ratioHoilday,
+      </if>
+      <if test="ratiotimeRestDay != null">
+        ratiotimeRestDay,
+      </if>
+      <if test="ratiotimeHoilday != null">
+        ratiotimeHoilday,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null">
+        #{range,jdbcType=VARCHAR},
+      </if>
+       <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="howLong != null">
+        #{howLong,jdbcType=VARCHAR},
+      </if>
+      <if test="isWorkDay != null">
+        #{isWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="workDayCompute != null">
+        #{workDayCompute,jdbcType=VARCHAR},
+      </if>
+       <if test="isMoneyWorkDay != null">
+        #{isMoneyWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyWorkDay != null">
+        #{moneyWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="ratioWorkDay != null">
+        #{ratioWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="ratiotimeWorkDay != null">
+        #{ratiotimeWorkDay,jdbcType=VARCHAR},
+      </if>
+       <if test="isRestDay != null">
+        #{isRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="isHoilday != null">
+        #{isHoilday,jdbcType=VARCHAR},
+      </if>
+      <if test="restDayCompute != null">
+        #{restDayCompute,jdbcType=VARCHAR},
+      </if>
+      <if test="hoildayCompute != null">
+        #{hoildayCompute,jdbcType=VARCHAR},
+      </if>
+       <if test="isMoneyRestDay != null">
+        #{isMoneyRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="isMoneyHoilday != null">
+        #{isMoneyHoilday,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyRestDay != null">
+        #{moneyRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyHoilday != null">
+        #{moneyHoilday,jdbcType=VARCHAR},
+      </if>
+       <if test="ratioRestDay != null">
+        #{ratioRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="ratioHoilday != null">
+        #{ratioHoilday,jdbcType=VARCHAR},
+      </if>
+      <if test="ratiotimeRestDay != null">
+        #{ratiotimeRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="ratiotimeHoilday != null">
+        #{ratiotimeHoilday,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Ovretime">
+    update Ovretime
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null">
+        `range` = #{range,jdbcType=VARCHAR},
+      </if>
+       <if test="unit != null">
+         unit  = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="howLong != null">
+        howLong = #{howLong,jdbcType=VARCHAR},
+      </if>
+      <if test="isWorkDay != null">
+        isWorkDay = #{isWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="workDayCompute != null">
+        workDayCompute = #{workDayCompute,jdbcType=VARCHAR},
+      </if>
+       <if test="isMoneyWorkDay != null">
+        isMoneyWorkDay = #{isMoneyWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyWorkDay != null">
+        moneyWorkDay = #{moneyWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="ratioWorkDay != null">
+        ratioWorkDay = #{ratioWorkDay,jdbcType=VARCHAR},
+      </if>
+      <if test="ratiotimeWorkDay != null">
+        ratiotimeWorkDay = #{ratiotimeWorkDay,jdbcType=VARCHAR},
+      </if>
+       <if test="isRestDay != null">
+        isRestDay = #{isRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="isHoilday != null">
+        isHoilday = #{isHoilday,jdbcType=VARCHAR},
+      </if>
+      <if test="restDayCompute != null">
+        restDayCompute = #{restDayCompute,jdbcType=VARCHAR},
+      </if>
+      <if test="hoildayCompute != null">
+        hoildayCompute = #{hoildayCompute,jdbcType=VARCHAR},
+      </if>
+       <if test="isMoneyRestDay != null">
+        isMoneyRestDay = #{isMoneyRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="isMoneyHoilday != null">
+        isMoneyHoilday = #{isMoneyHoilday,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyRestDay != null">
+        moneyRestDay = #{moneyRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyHoilday != null">
+        moneyHoilday = #{moneyHoilday,jdbcType=VARCHAR},
+      </if>
+       <if test="ratioRestDay != null">
+        ratioRestDay = #{ratioRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="ratioHoilday != null">
+        ratioHoilday = #{ratioHoilday,jdbcType=VARCHAR},
+      </if>
+      <if test="ratiotimeRestDay != null">
+        ratiotimeRestDay = #{ratiotimeRestDay,jdbcType=VARCHAR},
+      </if>
+      <if test="ratiotimeHoilday != null">
+        ratiotimeHoilday = #{ratiotimeHoilday,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

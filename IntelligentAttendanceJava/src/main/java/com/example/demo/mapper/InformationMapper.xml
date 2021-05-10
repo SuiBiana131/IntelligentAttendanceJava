@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.InformationMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Information">
+    select * from information where userid = #{userid}
+  </select>
+  <select id="selectName" parameterType="String" resultType="com.example.demo.entity.Information">
+    select * from information,user where user.name = #{username} and information.userid = user.id
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Information">
+    select * from information 
+  </select>
+  <select id="selectCondition"  resultType="com.example.demo.entity.Information">
+    select * from information <where>
+    <if test="nickname != null and userid != ''">
+       nickname=#{nickname,jdbcType=INTEGER}
+    </if>
+    </where> 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from information
+    where userid = #{userid}
+  </delete>
+  <!--  <insert id="insert" parameterType="com.example.demo.entity.Information">
+    insert into information (articleID, userID, postTitle, 
+      postPageviews, postAudio, postTime, 
+      postCom, lastCom, postText
+      )
+    values (#{articleid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{posttitle,jdbcType=VARCHAR}, 
+      #{postpageviews,jdbcType=INTEGER}, #{postaudio,jdbcType=VARCHAR}, #{posttime,jdbcType=TIMESTAMP}, 
+      #{postcom,jdbcType=VARCHAR}, #{lastcom,jdbcType=VARCHAR}, #{posttext,jdbcType=LONGVARCHAR}
+      )
+  </insert>-->
+  <insert id="insert" parameterType="com.example.demo.entity.Information">
+    insert into information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="presentaddress != null">
+        presentaddress,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="identitynum != null">
+        identitynum,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="marriage != null">
+        marriage,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="work != null">
+        work,
+      </if>
+      <if test="bankcard != null">
+        bankcard,
+      </if>
+      <if test="backname != null">
+        backname,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="headshow != null">
+        headshow,
+      </if>
+      <if test="isailogin != null">
+        isailogin,
+      </if>
+      <if test="ailogin != null">
+        ailogin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="presentaddress != null">
+        #{presentaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="identitynum != null">
+        #{identitynum,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        #{marriage,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null">
+        #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcard != null">
+        #{bankcard,jdbcType=VARCHAR},
+      </if>
+      <if test="backname != null">
+        #{backname,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="headshow != null">
+        #{headshow,jdbcType=VARCHAR},
+      </if>
+      <if test="isailogin != null">
+        #{isailogin,jdbcType=INTEGER},
+      </if>
+      <if test="ailogin != null">
+        #{ailogin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Information">
+    update information
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        nickname=#{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        nation=#{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address=#{address,jdbcType=VARCHAR},
+      </if>
+      <if test="presentaddress != null">
+        presentaddress=#{presentaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone=#{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex=#{sex,jdbcType=INTEGER},
+      </if>
+      <if test="identitynum != null">
+        identitynum=#{identitynum,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department=#{department,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        marriage=#{marriage,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education=#{education,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null">
+        work=#{work,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcard != null">
+        bankcard=#{bankcard,jdbcType=VARCHAR},
+      </if>
+      <if test="backname != null">
+        backname=#{backname,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks=#{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money=#{money,jdbcType=INTEGER},
+      </if>
+      <if test="headshow != null">
+        headshow=#{headshow,jdbcType=VARCHAR},
+      </if>
+      <if test="isailogin != null">
+        isailogin=#{isailogin,jdbcType=INTEGER},
+      </if>
+      <if test="ailogin != null">
+        ailogin=#{ailogin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <!--<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.entity.article">
+    update article
+    set userID = #{userid,jdbcType=VARCHAR},
+      postTitle = #{posttitle,jdbcType=VARCHAR},
+      postPageviews = #{postpageviews,jdbcType=INTEGER},
+      postAudio = #{postaudio,jdbcType=VARCHAR},
+      postTime = #{posttime,jdbcType=TIMESTAMP},
+      postCom = #{postcom,jdbcType=VARCHAR},
+      lastCom = #{lastcom,jdbcType=VARCHAR},
+      postText = #{posttext,jdbcType=LONGVARCHAR}
+    where articleID = #{articleid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.entity.article">
+    update article
+    set userID = #{userid,jdbcType=VARCHAR},
+      postTitle = #{posttitle,jdbcType=VARCHAR},
+      postPageviews = #{postpageviews,jdbcType=INTEGER},
+      postAudio = #{postaudio,jdbcType=VARCHAR},
+      postTime = #{posttime,jdbcType=TIMESTAMP},
+      postCom = #{postcom,jdbcType=VARCHAR},
+      lastCom = #{lastcom,jdbcType=VARCHAR}
+    where articleID = #{articleid,jdbcType=VARCHAR}
+  </update> -->
+</mapper>

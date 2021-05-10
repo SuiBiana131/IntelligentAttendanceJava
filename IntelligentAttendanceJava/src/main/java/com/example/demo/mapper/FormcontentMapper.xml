@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.FormcontentMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Formcontent">
+    select * from Formcontent where id = #{id}
+  </select>
+  <select id="selectByOid" parameterType="int" resultType="com.example.demo.entity.Formcontent">
+    select * from Formcontent where formid = #{formid}
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Formcontent">
+    select * from Formcontent 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Formcontent
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Formcontent">
+    insert into Formcontent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="formid != null">
+        formid,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="statrtTime != null">
+        statrtTime,
+      </if>
+      <if test="endTime != null">
+        endTime,
+      </if>
+      <if test="optime != null">
+        optime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="formid != null">
+        #{formid,jdbcType=VARCHAR},
+      </if>
+       <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="statrtTime != null">
+        #{statrtTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+       <if test="optime != null">
+        #{optime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Formcontent">
+    update Formcontent
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=INTEGER},
+      </if>
+      <if test="formid != null">
+        formid = #{formid,jdbcType=VARCHAR},
+      </if>
+       <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="statrtTime != null">
+        statrtTime = #{statrtTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        endTime = #{endTime,jdbcType=VARCHAR},
+      </if>
+       <if test="optime != null">
+        optime = #{optime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

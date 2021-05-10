@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.FixedworkdayMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Fixedworkday">
+    select * from Fixedworkday where id = #{id}
+  </select>
+  <select id="selectBygid"  resultType="com.example.demo.entity.Fixedworkday">
+    select * from Fixedworkday where groupId = #{id} 
+  </select>
+  <select id="selectAll"  resultType="com.example.demo.entity.Fixedworkday">
+    select * from Fixedworkday 
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Fixedworkday
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Fixedworkday">
+    insert into Fixedworkday
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+      <if test="groupId != null">
+        groupId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=VARCHAR},
+      </if>
+       <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Fixedworkday">
+    update Fixedworkday
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date=#{date,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        times=#{times,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        groupId=#{groupId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

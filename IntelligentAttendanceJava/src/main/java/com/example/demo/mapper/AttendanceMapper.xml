@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 命名空间 和包名相同-->
+<mapper namespace="com.example.demo.mapper.AttendanceMapper">
+  <select id="selectById" parameterType="int" resultType="com.example.demo.entity.Attendance">
+    select * from Attendance where id = #{id}
+  </select>
+  <delete id="deleteById" parameterType="int">
+    delete from Attendance
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Attendance">
+    insert into Attendance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="end != null">
+        end,
+      </if>
+      <if test="marks != null">
+        marks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=TIME},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=TIME},
+      </if>
+       <if test="marks != null">
+        #{marks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.example.demo.entity.Attendance">
+    update Attendance
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        start=#{start,jdbcType=TIME},
+      </if>
+      <if test="end != null">
+        end=#{end,jdbcType=TIME},
+      </if>
+      <if test="marks != null">
+        marks=#{marks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
